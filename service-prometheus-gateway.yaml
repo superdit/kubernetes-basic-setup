@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-pushgateway
+  labels:
+      app: prometheus-pushgateway
+      tier: monitoring
+      stage: dev
+      ver: v0.3
+spec:
+  selector:
+    matchLabels:
+      app: prometheus-pushgateway
+  replicas: 1
+  revisionHistoryLimit: 0
+  template:
+    metadata:
+      labels:
+        app: prometheus-pushgateway
+        tier: monitoring
+        stage: dev
+        ver: v0.3
+    spec:
+      containers:
+      - name: prometheus-pushgateway
+        image: prom/pushgateway
+        imagePullPolicy: "Always"
+        ports:
+        - containerPort: 9091
+        resources:
+          requests:
+            cpu: 250m
+            memory: 64Mi
+          limits:
+            cpu: 500m
+            memory: 250Mi
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus-pushgateway
+  labels:
+    app: prometheus-pushgateway
+    tier: monitoring
+    stage: dev
+    ver: v0.3
+spec:
+  type: NodePort
+  selector:
+    app: prometheus-pushgateway
+  ports:
+    - port: 80
+      targetPort: 9091
+      nodePort: 31000

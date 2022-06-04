@@ -1,0 +1,5 @@
+follow each steps on file name, run on kubernetes cluster
+
+reference: 
+- https://medium.com/@chris_linguine/how-to-monitor-distributed-logs-in-kubernetes-with-the-efk-stack-1218a565ce0c
+    copied: https://docs.google.com/document/d/1XDK0XCFZTmgMkqRRA0pK94ke8PQ7o-GywG9HMsQX7gA/edit?usp=sharing
